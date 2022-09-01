@@ -1,4 +1,7 @@
 const emoji = '!emoji '
+const fetch = require('node-fetch');
+const blackjack = require("discord-blackjack")
+
 
 module.exports = {
     name : 'messageCreate',
@@ -48,6 +51,28 @@ module.exports = {
         } else if(content.includes('/oof') || content.includes('/bigoof')) {
             const { big_oof } = require('../emojibot_files/builtInMessages.json')
             message.channel.send(big_oof)
+        } else if(content.includes('dog')) {
+            fetch('https://dog.ceo/api/breeds/image/random').then(r => r.json()).then(dog => { 
+                message.channel.send(dog.message)
+            }).catch(e => {
+                console.log(e);
+            })
+        } else if(content.includes('facts')) {
+            fetch('https://uselessfacts.jsph.pl/random.json?language=en').then(r => r.json()).then(data => { 
+            message.channel.send(data.text);
+            }).catch(e => {
+                console.log(e);
+            })
+        } else if(content.includes('meme')) {
+            fetch(' https://api.imgflip.com/get_memes').then(r => r.json()).then(data => { 
+                console.log(data);
+                let n = Math.floor(Math.random() * 50);
+            message.channel.send(data.data.memes[n].url);
+            }).catch(e => {
+                console.log(e);
+            })
+        } else if(content.includes('blackjackbaby')) {
+            blackjack(message);
         }
 
         // if(content === '!!ping') await message.channel.send('Pong!')
