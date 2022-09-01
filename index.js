@@ -27,7 +27,7 @@ for(const file of eventFiles) {
     }
 }
 
-client.login(process.env.TOKEN)then((token) => {
+client.login(process.env.TOKEN).then((token) => {
     // client.user is now defined
     client.user.setPresence({
      game: { name: '.help' },
